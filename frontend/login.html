@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Real-Time Chat</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(135deg, #667eea, #764ba2);
+
+            padding: 20px;
+        }
+
+        /* Main container */
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            animation: slideUp 0.6s ease;
+        }
+
+        /* Animation */
+
+        @keyframes slideUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* Logo */
+
+        .logo {
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            font-size: 32px;
+
+            box-shadow:
+                0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Heading */
+
+        h1 {
+            text-align: center;
+
+            color: #222;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+        /* Input group */
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+
+            background: #fafafa;
+        }
+
+        .input-group input:focus {
+
+            border-color: #667eea;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(102, 126, 234, 0.15);
+        }
+
+        /* Login button */
+
+        .login-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(102, 126, 234, 0.35);
+        }
+
+        .login-btn:active {
+
+            transform: translateY(0);
+        }
+
+        /* Result message */
+
+        #result {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            font-size: 14px;
+
+            color: #e74c3c;
+        }
+
+        /* Register */
+
+        .register-text {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+        .register-text a {
+
+            color: #667eea;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .register-text a:hover {
+
+            text-decoration: underline;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 480px) {
+
+            .login-container {
+
+                padding: 30px 22px;
+
+            }
+
+            h1 {
+
+                font-size: 26px;
+
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+    <!-- Logo -->
+
+    <div class="logo">
+        💬
+    </div>
+
+
+    <!-- Heading -->
+
+    <h1>Welcome Back!</h1>
+
+    <p class="subtitle">
+        Login to continue chatting
+    </p>
+
+
+    <!-- Login Form -->
+
+    <form id="loginForm">
+
+
+        <div class="input-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            Login
+        </button>
+
+
+    </form>
+
+
+    <!-- Result -->
+
+    <p id="result"></p>
+
+
+    <!-- Register -->
+
+    <p class="register-text">
+
+        Don't have an account?
+
+        <a href="/register-page">
+            Create Account
+        </a>
+
+    </p>
+
+
+</div>
+
+
+<script>
+
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById("email").value;
+
+        const password =
+            document.getElementById("password").value;
+
+
+        const result =
+            document.getElementById("result");
+
+
+        result.innerText = "Logging in...";
+
+
+        const url =
+            "/login?email=" +
+            encodeURIComponent(email) +
+            "&password=" +
+            encodeURIComponent(password);
+
+
+        try {
+
+
+            const response =
+                await fetch(url, {
+
+                    method: "POST"
+
+                });
+
+
+            const data =
+                await response.json();
+
+
+            if (response.ok) {
+
+
+                // Save user information
+
+                localStorage.setItem(
+                    "user_id",
+                    data.user_id
+                );
+
+
+                localStorage.setItem(
+                    "username",
+                    data.username
+                );
+
+
+                localStorage.setItem(
+                    "email",
+                    data.email
+                );
+
+
+                result.style.color = "green";
+
+                result.innerText =
+                    "Login successful!";
+
+
+                // Go to chat
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "/chat-page";
+
+                }, 700);
+
+
+            } else {
+
+
+                result.style.color =
+                    "#e74c3c";
+
+                result.innerText =
+                    data.detail ||
+                    "Invalid email or password";
+
+            }
+
+
+        } catch (error) {
+
+
+            result.style.color =
+                "#e74c3c";
+
+            result.innerText =
+                "Cannot connect to backend";
+
+
+            console.error(error);
+
+        }
+
+
+    });
+
+
+</script>
+
+
+</body>
+</html>

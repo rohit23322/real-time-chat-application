@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time Chat</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(135deg, #667eea, #764ba2);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+
+        }
+
+
+        /* =========================
+           CHAT CONTAINER
+        ========================= */
+
+        .chat-container {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            height: 650px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .chat-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2
+                );
+
+            color: white;
+
+            padding: 18px 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .header-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .chat-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            background: rgba(255,255,255,0.2);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 22px;
+
+        }
+
+
+        .header-title h2 {
+
+            font-size: 20px;
+
+        }
+
+
+        .header-title p {
+
+            font-size: 12px;
+
+            opacity: 0.8;
+
+            margin-top: 3px;
+
+        }
+
+
+        .status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            font-size: 13px;
+
+        }
+
+
+        .status-dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #ff4757;
+
+        }
+
+
+        .status-dot.connected {
+
+            background: #2ed573;
+
+            box-shadow: 0 0 8px #2ed573;
+
+        }
+
+
+        /* =========================
+           USER INFORMATION
+        ========================= */
+
+        .user-info {
+
+            background: #f7f8fc;
+
+            padding: 12px 25px;
+
+            border-bottom: 1px solid #eee;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .user-id {
+
+            color: #555;
+
+        }
+
+
+        .user-id strong {
+
+            color: #667eea;
+
+        }
+
+
+        .connect-btn {
+
+            border: none;
+
+            padding: 8px 18px;
+
+            border-radius: 8px;
+
+            background: #667eea;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+
+        }
+
+
+        .connect-btn:hover {
+
+            background: #5568d8;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =========================
+           MESSAGES
+        ========================= */
+
+        .messages {
+
+            flex: 1;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+            background: #f5f7fb;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+        }
+
+
+        .welcome-message {
+
+            text-align: center;
+
+            color: #999;
+
+            margin-top: 30px;
+
+            font-size: 14px;
+
+        }
+
+
+        .message {
+
+            max-width: 70%;
+
+            padding: 11px 15px;
+
+            border-radius: 15px;
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+            word-wrap: break-word;
+
+        }
+
+
+        .sent {
+
+            align-self: flex-end;
+
+            background: #667eea;
+
+            color: white;
+
+            border-bottom-right-radius: 4px;
+
+        }
+
+
+        .received {
+
+            align-self: flex-start;
+
+            background: white;
+
+            color: #333;
+
+            border-bottom-left-radius: 4px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+        }
+
+
+        .message small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            opacity: 0.65;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================
+           INPUT AREA
+        ========================= */
+
+        .input-area {
+
+            padding: 15px;
+
+            background: white;
+
+            border-top: 1px solid #eee;
+
+        }
+
+
+        .receiver-row {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .receiver-row input {
+
+            flex: 1;
+
+            padding: 11px 13px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 9px;
+
+            outline: none;
+
+        }
+
+
+        .receiver-row input:focus {
+
+            border-color: #667eea;
+
+            box-shadow:
+                0 0 0 3px rgba(102,126,234,0.1);
+
+        }
+
+
+        .message-row {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .message-row input {
+
+            flex: 1;
+
+            padding: 13px 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 25px;
+
+            outline: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .message-row input:focus {
+
+            border-color: #667eea;
+
+            box-shadow:
+                0 0 0 3px rgba(102,126,234,0.1);
+
+        }
+
+
+        .send-btn {
+
+            width: 50px;
+
+            height: 50px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .send-btn:hover {
+
+            transform: scale(1.08);
+
+            box-shadow:
+                0 5px 15px rgba(102,126,234,0.4);
+
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        .logout-btn {
+
+            border: none;
+
+            background: rgba(255,255,255,0.15);
+
+            color: white;
+
+            padding: 8px 12px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+        }
+
+
+        .logout-btn:hover {
+
+            background: rgba(255,255,255,0.25);
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            body {
+
+                padding: 0;
+
+            }
+
+
+            .chat-container {
+
+                height: 100vh;
+
+                border-radius: 0;
+
+            }
+
+
+            .message {
+
+                max-width: 85%;
+
+            }
+
+
+            .header-title h2 {
+
+                font-size: 17px;
+
+            }
+
+
+            .user-info {
+
+                padding: 10px 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="chat-container">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <div class="chat-header">
+
+        <div class="header-left">
+
+            <div class="chat-icon">
+                💬
+            </div>
+
+            <div class="header-title">
+
+                <h2>Real-Time Chat</h2>
+
+                <p id="username">
+                    Welcome
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <div class="status">
+
+                <span
+                    class="status-dot"
+                    id="statusDot">
+                </span>
+
+                <span id="statusText">
+                    Disconnected
+                </span>
+
+            </div>
+
+            <button
+                class="logout-btn"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         USER INFO
+    ========================= -->
+
+    <div class="user-info">
+
+        <div class="user-id">
+
+            Your User ID:
+
+            <strong id="userId">
+                -
+            </strong>
+
+        </div>
+
+
+        <button
+            class="connect-btn"
+            onclick="connectWebSocket()">
+
+            Connect
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         MESSAGES
+    ========================= -->
+
+    <div
+        class="messages"
+        id="messages">
+
+        <div class="welcome-message">
+
+            👋 Welcome to your chat!
+
+            <br><br>
+
+            Connect and start messaging.
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         INPUT AREA
+    ========================= -->
+
+    <div class="input-area">
+
+
+        <div class="receiver-row">
+
+            <input
+                type="number"
+                id="receiverId"
+                placeholder="Receiver User ID">
+
+        </div>
+
+
+        <div class="message-row">
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Type your message..."
+                onkeydown="handleEnter(event)">
+
+            <button
+                class="send-btn"
+                onclick="sendMessage()">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   USER DATA
+========================= */
+
+const userId =
+    localStorage.getItem("user_id");
+
+const username =
+    localStorage.getItem("username");
+
+
+document.getElementById("userId").innerText =
+    userId || "Not logged in";
+
+
+document.getElementById("username").innerText =
+    username
+        ? "Welcome, " + username
+        : "Welcome";
+
+
+/* =========================
+   WEBSOCKET
+========================= */
+
+let socket = null;
+
+
+function connectWebSocket() {
+
+
+    if (!userId) {
+
+        alert("Please login first.");
+
+        window.location.href =
+            "/login-page";
+
+        return;
+
+    }
+
+
+    if (
+        socket &&
+        socket.readyState === WebSocket.OPEN
+    ) {
+
+        return;
+
+    }
+
+
+    const protocol =
+        window.location.protocol === "https:"
+            ? "wss:"
+            : "ws:";
+
+
+    const wsUrl =
+        protocol +
+        "//" +
+        window.location.host +
+        "/ws/" +
+        userId;
+
+
+    socket = new WebSocket(wsUrl);
+
+
+    socket.onopen = function() {
+
+        document.getElementById(
+            "statusText"
+        ).innerText = "Connected";
+
+
+        document.getElementById(
+            "statusDot"
+        ).classList.add("connected");
+
+    };
+
+
+    socket.onmessage = function(event) {
+
+        const data =
+            JSON.parse(event.data);
+
+
+        if (data.error) {
+
+            alert(data.error);
+
+            return;
+
+        }
+
+
+        displayMessage(
+            data.message,
+            data.sender_id == userId
+        );
+
+    };
+
+
+    socket.onclose = function() {
+
+        document.getElementById(
+            "statusText"
+        ).innerText = "Disconnected";
+
+
+        document.getElementById(
+            "statusDot"
+        ).classList.remove("connected");
+
+    };
+
+
+    socket.onerror = function(error) {
+
+        console.error(
+            "WebSocket error:",
+            error
+        );
+
+    };
+
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+function sendMessage() {
+
+
+    if (
+        !socket ||
+        socket.readyState !== WebSocket.OPEN
+    ) {
+
+        alert(
+            "Please connect first."
+        );
+
+        return;
+
+    }
+
+
+    const receiverId =
+        document.getElementById(
+            "receiverId"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "messageInput"
+        ).value.trim();
+
+
+    if (!receiverId) {
+
+        alert(
+            "Please enter Receiver ID."
+        );
+
+        return;
+
+    }
+
+
+    if (!message) {
+
+        return;
+
+    }
+
+
+    socket.send(
+        JSON.stringify({
+
+            receiver_id:
+                parseInt(receiverId),
+
+            message:
+                message
+
+        })
+    );
+
+
+    document.getElementById(
+        "messageInput"
+    ).value = "";
+
+}
+
+
+/* =========================
+   DISPLAY MESSAGE
+========================= */
+
+function displayMessage(
+    message,
+    isSent
+) {
+
+
+    const messages =
+        document.getElementById(
+            "messages"
+        );
+
+
+    const welcome =
+        document.querySelector(
+            ".welcome-message"
+        );
+
+
+    if (welcome) {
+
+        welcome.remove();
+
+    }
+
+
+    const messageDiv =
+        document.createElement("div");
+
+
+    messageDiv.classList.add(
+        "message"
+    );
+
+
+    if (isSent) {
+
+        messageDiv.classList.add(
+            "sent"
+        );
+
+    } else {
+
+        messageDiv.classList.add(
+            "received"
+        );
+
+    }
+
+
+    messageDiv.innerHTML =
+        escapeHtml(message) +
+        "<small>" +
+        new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit"
+        }) +
+        "</small>";
+
+
+    messages.appendChild(
+        messageDiv
+    );
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+/* =========================
+   ENTER TO SEND
+========================= */
+
+function handleEnter(event) {
+
+    if (
+        event.key === "Enter"
+    ) {
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+}
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHtml(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+
+    if (socket) {
+
+        socket.close();
+
+    }
+
+
+    localStorage.removeItem(
+        "user_id"
+    );
+
+    localStorage.removeItem(
+        "username"
+    );
+
+    localStorage.removeItem(
+        "email"
+    );
+
+
+    window.location.href =
+        "/login-page";
+
+}
+
+
+/* =========================
+   AUTO CONNECT
+========================= */
+
+if (userId) {
+
+    connectWebSocket();
+
+}
+
+</script>
+
+
+</body>
+
+</html>
