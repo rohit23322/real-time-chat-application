@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from database import Base
 
 class User(Base):
@@ -10,11 +10,11 @@ class User(Base):
     password = Column(String(255))
 
 
-# ADD THIS BELOW THE USER CLASS
 class Message(Base):
     __tablename__ = "messages"
 
     id = Column(Integer, primary_key=True, index=True)
-    sender_id = Column(Integer)
-    receiver_id = Column(Integer)
-    message = Column(String(1000))
+    sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    receiver_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    message = Column(String(1000), nullable=False)
+
