@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Real-Time Chat</title>
+    <title>Chat | Real-Time Chat</title>
 
     <style>
 
@@ -15,419 +16,510 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
-
             min-height: 100vh;
 
+            font-family: "Segoe UI", Arial, sans-serif;
+
             background:
-                linear-gradient(135deg, #667eea, #764ba2);
+                radial-gradient(
+                    circle at top left,
+                    #263b80 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #4b237d 0%,
+                    transparent 35%
+                ),
+                #080d1f;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             padding: 20px;
-
         }
-
 
         /* =========================
            CHAT CONTAINER
         ========================= */
 
         .chat-container {
-
             width: 100%;
+            max-width: 1050px;
 
-            max-width: 850px;
+            height: 700px;
 
-            height: 650px;
-
-            background: white;
-
-            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
 
             overflow: hidden;
 
+            background: #0d1326;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 24px;
+
             box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.25);
-
-            display: flex;
-
-            flex-direction: column;
-
+                0 30px 80px rgba(0,0,0,0.5);
         }
-
 
         /* =========================
            HEADER
         ========================= */
 
         .chat-header {
+            min-height: 78px;
+
+            padding: 15px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
             background:
                 linear-gradient(
                     135deg,
-                    #667eea,
-                    #764ba2
+                    #4f46e5,
+                    #7c3aed
                 );
 
             color: white;
-
-            padding: 18px 25px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
         }
-
 
         .header-left {
-
             display: flex;
-
             align-items: center;
-
-            gap: 12px;
-
+            gap: 13px;
         }
-
 
         .chat-icon {
-
-            width: 45px;
-
-            height: 45px;
-
-            background: rgba(255,255,255,0.2);
-
-            border-radius: 50%;
+            width: 48px;
+            height: 48px;
 
             display: flex;
-
+            align-items: center;
             justify-content: center;
 
-            align-items: center;
+            border-radius: 14px;
 
-            font-size: 22px;
+            background: rgba(255,255,255,0.15);
 
+            border: 1px solid rgba(255,255,255,0.2);
+
+            font-size: 23px;
         }
-
 
         .header-title h2 {
-
-            font-size: 20px;
-
+            font-size: 19px;
+            font-weight: 700;
         }
 
-
         .header-title p {
+            margin-top: 3px;
 
             font-size: 12px;
 
-            opacity: 0.8;
-
-            margin-top: 3px;
-
+            color: rgba(255,255,255,0.75);
         }
 
+        /* =========================
+           HEADER RIGHT
+        ========================= */
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
         .status {
-
             display: flex;
-
             align-items: center;
 
-            gap: 6px;
+            gap: 7px;
 
-            font-size: 13px;
+            font-size: 12px;
 
+            color: rgba(255,255,255,0.85);
         }
 
-
         .status-dot {
-
             width: 9px;
-
             height: 9px;
 
             border-radius: 50%;
 
-            background: #ff4757;
-
+            background: #ef4444;
         }
-
 
         .status-dot.connected {
+            background: #22c55e;
 
-            background: #2ed573;
-
-            box-shadow: 0 0 8px #2ed573;
-
+            box-shadow:
+                0 0 10px rgba(34,197,94,0.8);
         }
 
+        .logout-btn {
+            border: 1px solid rgba(255,255,255,0.2);
 
-        /* =========================
-           USER INFORMATION
-        ========================= */
+            background: rgba(255,255,255,0.1);
 
-        .user-info {
+            color: white;
 
-            background: #f7f8fc;
-
-            padding: 12px 25px;
-
-            border-bottom: 1px solid #eee;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            font-size: 14px;
-
-        }
-
-
-        .user-id {
-
-            color: #555;
-
-        }
-
-
-        .user-id strong {
-
-            color: #667eea;
-
-        }
-
-
-        .connect-btn {
-
-            border: none;
-
-            padding: 8px 18px;
+            padding: 8px 14px;
 
             border-radius: 8px;
 
-            background: #667eea;
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            transition: 0.25s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* =========================
+           USER BAR
+        ========================= */
+
+        .user-info {
+            min-height: 55px;
+
+            padding: 10px 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: #11182d;
+
+            border-bottom: 1px solid #252d45;
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+        .user-id {
+            color: #8f97aa;
+
+            font-size: 12px;
+        }
+
+        .user-id strong {
+            color: #c7d2fe;
+        }
+
+        .connect-btn {
+            border: none;
+
+            padding: 8px 16px;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
 
             color: white;
 
             cursor: pointer;
 
-            font-weight: bold;
+            font-size: 12px;
 
-            transition: 0.3s;
+            font-weight: 600;
 
+            transition: 0.25s;
         }
-
 
         .connect-btn:hover {
-
-            background: #5568d8;
-
             transform: translateY(-1px);
 
+            box-shadow:
+                0 5px 15px rgba(99,102,241,0.3);
         }
-
 
         /* =========================
            MESSAGES
         ========================= */
 
         .messages {
-
             flex: 1;
 
-            padding: 20px;
+            padding: 25px;
 
             overflow-y: auto;
 
-            background: #f5f7fb;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #151d35,
+                    #0c1224
+                );
 
             display: flex;
 
             flex-direction: column;
 
-            gap: 12px;
+            gap: 13px;
 
+            scrollbar-width: thin;
         }
 
-
         .welcome-message {
+            width: fit-content;
+
+            max-width: 420px;
+
+            margin: auto;
+
+            padding: 22px 28px;
 
             text-align: center;
 
-            color: #999;
+            color: #8f97aa;
 
-            margin-top: 30px;
+            font-size: 13px;
 
-            font-size: 14px;
+            line-height: 1.7;
 
+            background: rgba(255,255,255,0.04);
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            border-radius: 15px;
         }
 
+        /* =========================
+           MESSAGE BUBBLE
+        ========================= */
 
         .message {
+            position: relative;
 
-            max-width: 70%;
+            max-width: 68%;
 
-            padding: 11px 15px;
+            padding: 12px 15px;
 
             border-radius: 15px;
 
             font-size: 14px;
 
-            line-height: 1.4;
+            line-height: 1.5;
 
             word-wrap: break-word;
 
+            animation: messageIn 0.25s ease;
         }
 
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(7px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
 
         .sent {
-
             align-self: flex-end;
 
-            background: #667eea;
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #7c3aed
+                );
 
             color: white;
 
             border-bottom-right-radius: 4px;
 
+            box-shadow:
+                0 5px 15px rgba(79,70,229,0.2);
         }
-
 
         .received {
-
             align-self: flex-start;
 
-            background: white;
+            background: #1a2238;
 
-            color: #333;
+            color: #e5e7eb;
+
+            border: 1px solid #29334d;
 
             border-bottom-left-radius: 4px;
-
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-
         }
-
 
         .message small {
-
             display: block;
 
-            margin-top: 4px;
+            margin-top: 5px;
 
-            opacity: 0.65;
+            font-size: 9px;
 
-            font-size: 10px;
+            opacity: 0.6;
 
+            text-align: right;
         }
-
 
         /* =========================
            INPUT AREA
         ========================= */
 
         .input-area {
+            padding: 15px 20px 18px;
 
-            padding: 15px;
+            background: #11182d;
 
-            background: white;
-
-            border-top: 1px solid #eee;
-
+            border-top: 1px solid #252d45;
         }
 
+        /* Receiver */
 
         .receiver-row {
-
             display: flex;
+
+            align-items: center;
 
             gap: 10px;
 
             margin-bottom: 10px;
-
         }
 
+        .receiver-label {
+            color: #8f97aa;
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
 
         .receiver-row input {
+            width: 170px;
 
-            flex: 1;
+            padding: 9px 11px;
 
-            padding: 11px 13px;
+            border: 1px solid #303951;
 
-            border: 1px solid #ddd;
-
-            border-radius: 9px;
+            border-radius: 8px;
 
             outline: none;
 
-        }
+            background: #0c1224;
 
+            color: white;
+
+            font-size: 12px;
+
+            transition: 0.25s;
+        }
 
         .receiver-row input:focus {
-
-            border-color: #667eea;
+            border-color: #6366f1;
 
             box-shadow:
-                0 0 0 3px rgba(102,126,234,0.1);
-
+                0 0 0 3px rgba(99,102,241,0.12);
         }
 
+        .receiver-row input::placeholder {
+            color: #687086;
+        }
+
+        /* Message input */
 
         .message-row {
-
             display: flex;
 
             gap: 10px;
-
         }
 
-
         .message-row input {
-
             flex: 1;
 
-            padding: 13px 15px;
+            height: 50px;
 
-            border: 1px solid #ddd;
+            padding: 0 17px;
+
+            border: 1px solid #303951;
 
             border-radius: 25px;
 
             outline: none;
 
+            background: #0c1224;
+
+            color: white;
+
             font-size: 14px;
 
+            transition: 0.25s;
         }
 
+        .message-row input::placeholder {
+            color: #687086;
+        }
 
         .message-row input:focus {
-
-            border-color: #667eea;
+            border-color: #6366f1;
 
             box-shadow:
-                0 0 0 3px rgba(102,126,234,0.1);
-
+                0 0 0 3px rgba(99,102,241,0.12);
         }
 
+        /* =========================
+           SEND BUTTON
+        ========================= */
 
         .send-btn {
-
             width: 50px;
-
             height: 50px;
+
+            flex-shrink: 0;
 
             border: none;
 
@@ -436,8 +528,8 @@
             background:
                 linear-gradient(
                     135deg,
-                    #667eea,
-                    #764ba2
+                    #6366f1,
+                    #8b5cf6
                 );
 
             color: white;
@@ -446,91 +538,87 @@
 
             cursor: pointer;
 
-            transition: 0.3s;
-
+            transition: 0.25s;
         }
 
-
         .send-btn:hover {
-
             transform: scale(1.08);
 
             box-shadow:
-                0 5px 15px rgba(102,126,234,0.4);
-
+                0 7px 20px rgba(99,102,241,0.35);
         }
 
-
-        /* =========================
-           LOGOUT
-        ========================= */
-
-        .logout-btn {
-
-            border: none;
-
-            background: rgba(255,255,255,0.15);
-
-            color: white;
-
-            padding: 8px 12px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            font-size: 12px;
-
+        .send-btn:active {
+            transform: scale(0.96);
         }
-
-
-        .logout-btn:hover {
-
-            background: rgba(255,255,255,0.25);
-
-        }
-
 
         /* =========================
            MOBILE
         ========================= */
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
             body {
-
                 padding: 0;
-
             }
 
-
             .chat-container {
-
                 height: 100vh;
 
                 border-radius: 0;
-
             }
 
-
-            .message {
-
-                max-width: 85%;
-
+            .chat-header {
+                padding: 13px 15px;
             }
-
 
             .header-title h2 {
-
-                font-size: 17px;
-
+                font-size: 16px;
             }
 
+            .header-right {
+                gap: 8px;
+            }
+
+            .status {
+                display: none;
+            }
 
             .user-info {
-
                 padding: 10px 15px;
+            }
 
+            .messages {
+                padding: 18px 12px;
+            }
+
+            .message {
+                max-width: 85%;
+            }
+
+            .input-area {
+                padding: 12px;
+            }
+
+            .receiver-row input {
+                width: 150px;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+
+            .chat-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .logout-btn {
+                padding: 7px 10px;
+            }
+
+            .receiver-label {
+                display: none;
             }
 
         }
@@ -560,7 +648,9 @@
 
             <div class="header-title">
 
-                <h2>Real-Time Chat</h2>
+                <h2>
+                    Real-Time Chat
+                </h2>
 
                 <p id="username">
                     Welcome
@@ -571,7 +661,7 @@
         </div>
 
 
-        <div>
+        <div class="header-right">
 
             <div class="status">
 
@@ -585,6 +675,7 @@
                 </span>
 
             </div>
+
 
             <button
                 class="logout-btn"
@@ -600,18 +691,26 @@
 
 
     <!-- =========================
-         USER INFO
+         USER INFORMATION
     ========================= -->
 
     <div class="user-info">
 
-        <div class="user-id">
+        <div class="user-details">
 
-            Your User ID:
+            <div class="avatar" id="avatar">
+                U
+            </div>
 
-            <strong id="userId">
-                -
-            </strong>
+            <div class="user-id">
+
+                User ID:
+
+                <strong id="userId">
+                    -
+                </strong>
+
+            </div>
 
         </div>
 
@@ -637,11 +736,12 @@
 
         <div class="welcome-message">
 
-            👋 Welcome to your chat!
+            <strong>👋 Welcome to Real-Time Chat</strong>
 
-            <br><br>
+            <br>
 
-            Connect and start messaging.
+            Connect to the server and start
+            messaging in real time.
 
         </div>
 
@@ -657,10 +757,15 @@
 
         <div class="receiver-row">
 
+            <span class="receiver-label">
+                Chat with User ID:
+            </span>
+
             <input
                 type="number"
                 id="receiverId"
-                placeholder="Receiver User ID">
+                placeholder="Enter user ID"
+            >
 
         </div>
 
@@ -670,8 +775,11 @@
             <input
                 type="text"
                 id="messageInput"
-                placeholder="Type your message..."
-                onkeydown="handleEnter(event)">
+                placeholder="Write a message..."
+                autocomplete="off"
+                onkeydown="handleEnter(event)"
+            >
+
 
             <button
                 class="send-btn"
@@ -699,6 +807,7 @@
 const userId =
     localStorage.getItem("user_id");
 
+
 const username =
     localStorage.getItem("username");
 
@@ -711,6 +820,16 @@ document.getElementById("username").innerText =
     username
         ? "Welcome, " + username
         : "Welcome";
+
+
+/* Avatar */
+
+if (username) {
+
+    document.getElementById("avatar").innerText =
+        username.charAt(0).toUpperCase();
+
+}
 
 
 /* =========================
@@ -759,68 +878,87 @@ function connectWebSocket() {
         userId;
 
 
-    socket = new WebSocket(wsUrl);
+    socket =
+        new WebSocket(wsUrl);
 
 
-    socket.onopen = function() {
-
-        document.getElementById(
-            "statusText"
-        ).innerText = "Connected";
+    socket.onopen =
+        function() {
 
 
-        document.getElementById(
-            "statusDot"
-        ).classList.add("connected");
-
-    };
-
-
-    socket.onmessage = function(event) {
-
-        const data =
-            JSON.parse(event.data);
+            document.getElementById(
+                "statusText"
+            ).innerText =
+                "Connected";
 
 
-        if (data.error) {
-
-            alert(data.error);
-
-            return;
-
-        }
+            document.getElementById(
+                "statusDot"
+            ).classList.add(
+                "connected"
+            );
 
 
-        displayMessage(
-            data.message,
-            data.sender_id == userId
-        );
-
-    };
+        };
 
 
-    socket.onclose = function() {
-
-        document.getElementById(
-            "statusText"
-        ).innerText = "Disconnected";
+    socket.onmessage =
+        function(event) {
 
 
-        document.getElementById(
-            "statusDot"
-        ).classList.remove("connected");
+            const data =
+                JSON.parse(
+                    event.data
+                );
 
-    };
+
+            if (data.error) {
+
+                alert(data.error);
+
+                return;
+
+            }
 
 
-    socket.onerror = function(error) {
+            displayMessage(
+                data.message,
+                data.sender_id == userId
+            );
 
-        console.error(
-            "WebSocket error:",
-            error
-        );
 
-    };
+        };
+
+
+    socket.onclose =
+        function() {
+
+
+            document.getElementById(
+                "statusText"
+            ).innerText =
+                "Disconnected";
+
+
+            document.getElementById(
+                "statusDot"
+            ).classList.remove(
+                "connected"
+            );
+
+
+        };
+
+
+    socket.onerror =
+        function(error) {
+
+            console.error(
+                "WebSocket error:",
+                error
+            );
+
+        };
 
 }
 
@@ -893,6 +1031,11 @@ function sendMessage() {
         "messageInput"
     ).value = "";
 
+
+    document.getElementById(
+        "messageInput"
+    ).focus();
+
 }
 
 
@@ -926,7 +1069,9 @@ function displayMessage(
 
 
     const messageDiv =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     messageDiv.classList.add(
@@ -952,10 +1097,13 @@ function displayMessage(
     messageDiv.innerHTML =
         escapeHtml(message) +
         "<small>" +
-        new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit"
-        }) +
+        new Date().toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        ) +
         "</small>";
 
 
@@ -976,6 +1124,7 @@ function displayMessage(
 
 function handleEnter(event) {
 
+
     if (
         event.key === "Enter"
     ) {
@@ -995,10 +1144,16 @@ function handleEnter(event) {
 
 function escapeHtml(text) {
 
-    const div =
-        document.createElement("div");
 
-    div.textContent = text;
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
@@ -1023,9 +1178,11 @@ function logout() {
         "user_id"
     );
 
+
     localStorage.removeItem(
         "username"
     );
+
 
     localStorage.removeItem(
         "email"
@@ -1054,3 +1211,4 @@ if (userId) {
 </body>
 
 </html>
+```
