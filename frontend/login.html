@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,54 +6,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Real-Time Chat</title>
+    <title>Login | Real-Time Chat</title>
 
     <style>
+
+        /* ==============================
+           RESET
+        ============================== */
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
+
+        /* ==============================
+           BODY
+        ============================== */
 
         body {
             min-height: 100vh;
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background:
-                linear-gradient(135deg, #667eea, #764ba2);
-
             padding: 20px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #263b80 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #4b237d 0%,
+                    transparent 35%
+                ),
+                #080d1f;
+
+            color: white;
         }
 
-        /* Main container */
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
 
-        .login-container {
+        .container {
             width: 100%;
-            max-width: 420px;
+            max-width: 1050px;
+            min-height: 620px;
 
-            background: rgba(255, 255, 255, 0.95);
+            display: flex;
 
-            padding: 40px;
+            overflow: hidden;
 
-            border-radius: 20px;
+            border-radius: 24px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            backdrop-filter: blur(20px);
 
             box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.25);
+                0 25px 70px rgba(0, 0, 0, 0.45);
 
-            animation: slideUp 0.6s ease;
+            animation: fadeIn 0.6s ease;
         }
 
-        /* Animation */
+        /* ==============================
+           ANIMATION
+        ============================== */
 
-        @keyframes slideUp {
+        @keyframes fadeIn {
 
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(25px);
             }
 
             to {
@@ -62,57 +96,156 @@
 
         }
 
+        /* ==============================
+           LEFT SECTION
+        ============================== */
+
+        .left-section {
+            width: 50%;
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79, 70, 229, 0.85),
+                    rgba(124, 58, 237, 0.65)
+                );
+        }
+
         /* Logo */
 
         .logo {
-            width: 70px;
-            height: 70px;
-
-            margin: 0 auto 20px;
+            width: 62px;
+            height: 62px;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            border-radius: 50%;
+            border-radius: 16px;
 
-            background: linear-gradient(
-                135deg,
-                #667eea,
-                #764ba2
-            );
+            background: rgba(255, 255, 255, 0.15);
 
-            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
 
-            font-size: 32px;
+            font-size: 29px;
 
-            box-shadow:
-                0 8px 20px rgba(102, 126, 234, 0.4);
+            margin-bottom: 25px;
         }
 
         /* Heading */
 
-        h1 {
-            text-align: center;
+        .left-section h1 {
+            font-size: 42px;
 
-            color: #222;
+            line-height: 1.15;
 
+            letter-spacing: -1px;
+
+            margin-bottom: 18px;
+        }
+
+        .description {
+            max-width: 420px;
+
+            color: rgba(255, 255, 255, 0.82);
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            margin-bottom: 35px;
+        }
+
+        /* ==============================
+           FEATURES
+        ============================== */
+
+        .features {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            color: rgba(255, 255, 255, 0.9);
+
+            font-size: 15px;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ==============================
+           RIGHT SECTION
+        ============================== */
+
+        .right-section {
+            width: 50%;
+
+            padding: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(7, 12, 29, 0.72);
+        }
+
+        .form-container {
+            width: 100%;
+
+            max-width: 390px;
+        }
+
+        /* ==============================
+           FORM HEADER
+        ============================== */
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
             font-size: 30px;
 
             margin-bottom: 8px;
         }
 
-        .subtitle {
-            text-align: center;
-
-            color: #777;
+        .form-header p {
+            color: #9ca3af;
 
             font-size: 14px;
-
-            margin-bottom: 30px;
         }
 
-        /* Input group */
+        /* ==============================
+           INPUTS
+        ============================== */
 
         .input-group {
             margin-bottom: 20px;
@@ -123,355 +256,676 @@
 
             margin-bottom: 8px;
 
-            color: #333;
+            color: #d1d5db;
 
             font-size: 14px;
 
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        .input-group input {
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
             width: 100%;
 
-            padding: 14px 15px;
+            height: 52px;
 
-            border: 1px solid #ddd;
+            padding: 0 15px;
 
-            border-radius: 10px;
+            border-radius: 11px;
+
+            border: 1px solid #30374f;
 
             outline: none;
 
+            background: #11172a;
+
+            color: white;
+
             font-size: 15px;
 
-            transition: 0.3s;
-
-            background: #fafafa;
+            transition: 0.25s;
         }
 
-        .input-group input:focus {
+        .input-wrapper input::placeholder {
+            color: #687086;
+        }
 
-            border-color: #667eea;
+        .input-wrapper input:focus {
+            border-color: #6366f1;
 
-            background: white;
+            background: #141b31;
 
             box-shadow:
-                0 0 0 3px rgba(102, 126, 234, 0.15);
+                0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 
-        /* Login button */
+        /* ==============================
+           PASSWORD
+        ============================== */
+
+        .password-input {
+            padding-right: 50px !important;
+        }
+
+        .show-password {
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #8b93a7;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 4px;
+        }
+
+        .show-password:hover {
+            color: white;
+        }
+
+        /* ==============================
+           LOGIN BUTTON
+        ============================== */
 
         .login-btn {
             width: 100%;
 
-            padding: 14px;
+            height: 52px;
+
+            margin-top: 5px;
 
             border: none;
 
-            border-radius: 10px;
+            border-radius: 11px;
 
             background:
                 linear-gradient(
                     135deg,
-                    #667eea,
-                    #764ba2
+                    #6366f1,
+                    #8b5cf6
                 );
 
             color: white;
 
-            font-size: 16px;
+            font-size: 15px;
 
-            font-weight: bold;
+            font-weight: 700;
 
             cursor: pointer;
 
-            transition: 0.3s;
+            transition: 0.25s;
 
-            margin-top: 5px;
+            box-shadow:
+                0 8px 25px rgba(99, 102, 241, 0.25);
         }
 
         .login-btn:hover {
-
             transform: translateY(-2px);
 
             box-shadow:
-                0 8px 20px rgba(102, 126, 234, 0.35);
+                0 12px 30px rgba(99, 102, 241, 0.35);
         }
 
         .login-btn:active {
-
             transform: translateY(0);
         }
 
-        /* Result message */
+        .login-btn:disabled {
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        /* ==============================
+           RESULT
+        ============================== */
 
         #result {
+            min-height: 20px;
+
+            margin-top: 15px;
 
             text-align: center;
 
-            margin-top: 18px;
-
             font-size: 14px;
 
-            color: #e74c3c;
+            font-weight: 500;
         }
 
-        /* Register */
+        /* ==============================
+           REGISTER
+        ============================== */
 
         .register-text {
-
             text-align: center;
 
             margin-top: 25px;
 
-            color: #777;
+            color: #8f97aa;
 
             font-size: 14px;
         }
 
         .register-text a {
+            color: #818cf8;
 
-            color: #667eea;
+            font-weight: 700;
 
             text-decoration: none;
 
-            font-weight: bold;
+            margin-left: 4px;
         }
 
         .register-text a:hover {
+            color: #a5b4fc;
 
             text-decoration: underline;
         }
 
-        /* Mobile */
+        /* ==============================
+           SECURITY
+        ============================== */
 
-        @media (max-width: 480px) {
+        .security {
+            text-align: center;
 
-            .login-container {
+            margin-top: 25px;
 
-                padding: 30px 22px;
+            color: #656d82;
 
+            font-size: 12px;
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 800px) {
+
+            .container {
+                max-width: 450px;
+
+                min-height: auto;
             }
 
-            h1 {
+            .left-section {
+                display: none;
+            }
 
+            .right-section {
+                width: 100%;
+
+                padding: 45px 30px;
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                border-radius: 18px;
+            }
+
+            .right-section {
+                padding: 35px 22px;
+            }
+
+            .form-header h2 {
                 font-size: 26px;
-
             }
 
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-<div class="login-container">
+    <div class="container">
 
-    <!-- Logo -->
 
-    <div class="logo">
-        💬
+        <!-- =================================
+             LEFT SECTION
+        ================================== -->
+
+        <div class="left-section">
+
+            <div class="logo">
+                💬
+            </div>
+
+
+            <h1>
+                Welcome<br>
+                Back.
+            </h1>
+
+
+            <p class="description">
+                Sign in to continue your conversations
+                and connect with people in real time.
+            </p>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <span>
+                        Fast real-time messaging
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔒
+                    </div>
+
+                    <span>
+                        Secure authentication
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🌐
+                    </div>
+
+                    <span>
+                        Chat from anywhere
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             RIGHT SECTION
+        ================================== -->
+
+        <div class="right-section">
+
+
+            <div class="form-container">
+
+
+                <!-- FORM HEADER -->
+
+                <div class="form-header">
+
+                    <h2>
+                        Welcome Back!
+                    </h2>
+
+                    <p>
+                        Login to your account to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="password-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-btn"
+                        id="loginButton"
+                    >
+                        Login
+                    </button>
+
+
+                </form>
+
+
+                <!-- RESULT -->
+
+                <p id="result"></p>
+
+
+                <!-- REGISTER -->
+
+                <p class="register-text">
+
+                    Don't have an account?
+
+                    <a href="/register-page">
+                        Create Account
+                    </a>
+
+                </p>
+
+
+                <div class="security">
+                    Your information is securely processed.
+                </div>
+
+
+            </div>
+
+        </div>
+
     </div>
 
 
-    <!-- Heading -->
+    <script>
 
-    <h1>Welcome Back!</h1>
 
-    <p class="subtitle">
-        Login to continue chatting
-    </p>
+        /* ==============================
+           SHOW / HIDE PASSWORD
+        ============================== */
 
+        const passwordInput =
+            document.getElementById("password");
 
-    <!-- Login Form -->
 
-    <form id="loginForm">
+        const togglePassword =
+            document.getElementById("togglePassword");
 
 
-        <div class="input-group">
+        togglePassword.addEventListener(
+            "click",
+            function () {
 
-            <label for="email">
-                Email Address
-            </label>
+                if (
+                    passwordInput.type === "password"
+                ) {
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
+                    passwordInput.type = "text";
 
-        </div>
+                    togglePassword.innerText = "🙈";
 
+                } else {
 
-        <div class="input-group">
+                    passwordInput.type = "password";
 
-            <label for="password">
-                Password
-            </label>
+                    togglePassword.innerText = "👁";
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-                required
-            >
-
-        </div>
-
-
-        <button
-            type="submit"
-            class="login-btn"
-        >
-            Login
-        </button>
-
-
-    </form>
-
-
-    <!-- Result -->
-
-    <p id="result"></p>
-
-
-    <!-- Register -->
-
-    <p class="register-text">
-
-        Don't have an account?
-
-        <a href="/register-page">
-            Create Account
-        </a>
-
-    </p>
-
-
-</div>
-
-
-<script>
-
-
-document
-    .getElementById("loginForm")
-    .addEventListener("submit", async function(event) {
-
-        event.preventDefault();
-
-
-        const email =
-            document.getElementById("email").value;
-
-        const password =
-            document.getElementById("password").value;
-
-
-        const result =
-            document.getElementById("result");
-
-
-        result.innerText = "Logging in...";
-
-
-        const url =
-            "/login?email=" +
-            encodeURIComponent(email) +
-            "&password=" +
-            encodeURIComponent(password);
-
-
-        try {
-
-
-            const response =
-                await fetch(url, {
-
-                    method: "POST"
-
-                });
-
-
-            const data =
-                await response.json();
-
-
-            if (response.ok) {
-
-
-                // Save user information
-
-                localStorage.setItem(
-                    "user_id",
-                    data.user_id
-                );
-
-
-                localStorage.setItem(
-                    "username",
-                    data.username
-                );
-
-
-                localStorage.setItem(
-                    "email",
-                    data.email
-                );
-
-
-                result.style.color = "green";
-
-                result.innerText =
-                    "Login successful!";
-
-
-                // Go to chat
-
-                setTimeout(function() {
-
-                    window.location.href =
-                        "/chat-page";
-
-                }, 700);
-
-
-            } else {
-
-
-                result.style.color =
-                    "#e74c3c";
-
-                result.innerText =
-                    data.detail ||
-                    "Invalid email or password";
+                }
 
             }
+        );
 
 
-        } catch (error) {
+        /* ==============================
+           LOGIN
+        ============================== */
+
+        document
+            .getElementById("loginForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
 
 
-            result.style.color =
-                "#e74c3c";
-
-            result.innerText =
-                "Cannot connect to backend";
-
-
-            console.error(error);
-
-        }
+                    const email =
+                        document
+                            .getElementById("email")
+                            .value
+                            .trim();
 
 
-    });
+                    const password =
+                        document
+                            .getElementById("password")
+                            .value;
 
 
-</script>
+                    const result =
+                        document.getElementById("result");
+
+
+                    const button =
+                        document.getElementById("loginButton");
+
+
+                    /* Clear message */
+
+                    result.innerText = "";
+
+
+                    /* Loading */
+
+                    button.disabled = true;
+
+                    button.innerText =
+                        "Logging in...";
+
+
+                    /* API URL */
+
+                    const url =
+                        "/login?email=" +
+                        encodeURIComponent(email) +
+                        "&password=" +
+                        encodeURIComponent(password);
+
+
+                    try {
+
+
+                        const response =
+                            await fetch(
+                                url,
+                                {
+                                    method: "POST"
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        /* ==========================
+                           SUCCESS
+                        ========================== */
+
+                        if (response.ok) {
+
+
+                            localStorage.setItem(
+                                "user_id",
+                                data.user_id
+                            );
+
+
+                            localStorage.setItem(
+                                "username",
+                                data.username
+                            );
+
+
+                            localStorage.setItem(
+                                "email",
+                                data.email
+                            );
+
+
+                            result.style.color =
+                                "#86efac";
+
+
+                            result.innerText =
+                                "Login successful! ✓";
+
+
+                            button.innerText =
+                                "Login Successful ✓";
+
+
+                            /* Go to chat */
+
+                            setTimeout(
+                                function () {
+
+                                    window.location.href =
+                                        "/chat-page";
+
+                                },
+                                700
+                            );
+
+
+                        }
+
+
+                        /* ==========================
+                           ERROR
+                        ========================== */
+
+                        else {
+
+
+                            result.style.color =
+                                "#fca5a5";
+
+
+                            result.innerText =
+                                data.detail ||
+                                "Invalid email or password";
+
+
+                            button.disabled = false;
+
+                            button.innerText =
+                                "Login";
+
+                        }
+
+
+                    }
+
+
+                    catch (error) {
+
+
+                        console.error(error);
+
+
+                        result.style.color =
+                            "#fca5a5";
+
+
+                        result.innerText =
+                            "Cannot connect to backend";
+
+
+                        button.disabled = false;
+
+                        button.innerText =
+                            "Login";
+
+                    }
+
+                }
+            );
+
+    </script>
 
 
 </body>
+
 </html>
+```
