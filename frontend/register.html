@@ -1,147 +1,831 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Real-Time Chat</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+        /* ==============================
+           RESET
+        ============================== */
 
-        .box {
-            background: white;
-            width: 350px;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px #ccc;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            cursor: pointer;
+        /* ==============================
+           BODY
+        ============================== */
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at top left, #263b80 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #4b237d 0%, transparent 35%),
+                #080d1f;
+
+            color: #ffffff;
+            padding: 20px;
         }
 
+        /* ==============================
+           MAIN CONTAINER
+        ============================== */
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 620px;
+
+            display: flex;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        /* ==============================
+           LEFT SECTION
+        ============================== */
+
+        .left-section {
+            width: 50%;
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79, 70, 229, 0.85),
+                    rgba(124, 58, 237, 0.65)
+                );
+        }
+
+        .logo {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            font-size: 27px;
+
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .left-section h1 {
+            font-size: 42px;
+            line-height: 1.15;
+
+            margin-bottom: 18px;
+
+            letter-spacing: -1px;
+        }
+
+        .left-section .description {
+            color: rgba(255, 255, 255, 0.82);
+
+            font-size: 16px;
+            line-height: 1.7;
+
+            max-width: 420px;
+
+            margin-bottom: 35px;
+        }
+
+        /* ==============================
+           FEATURES
+        ============================== */
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            color: rgba(255, 255, 255, 0.9);
+
+            font-size: 15px;
+        }
+
+        .feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ==============================
+           RIGHT SECTION
+        ============================== */
+
+        .right-section {
+            width: 50%;
+
+            padding: 55px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: rgba(7, 12, 29, 0.72);
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 390px;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: #9ca3af;
+
+            font-size: 14px;
+        }
+
+        /* ==============================
+           INPUTS
+        ============================== */
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #d1d5db;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+
+            height: 52px;
+
+            padding: 0 15px;
+
+            border-radius: 11px;
+
+            border: 1px solid #30374f;
+
+            outline: none;
+
+            background: #11172a;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            transition: 0.25s;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #687086;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #6366f1;
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.15);
+
+            background: #141b31;
+        }
+
+        /* ==============================
+           PASSWORD BUTTON
+        ============================== */
+
+        .password-input {
+            padding-right: 50px !important;
+        }
+
+        .show-password {
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #8b93a7;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 3px;
+        }
+
+        .show-password:hover {
+            color: #ffffff;
+        }
+
+        /* ==============================
+           REGISTER BUTTON
+        ============================== */
+
+        .register-btn {
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 8px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(99, 102, 241, 0.35);
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+        }
+
+        .register-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ==============================
+           RESULT MESSAGE
+        ============================== */
+
         #result {
-            text-align: center;
+            min-height: 20px;
+
             margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            color: #a5b4fc;
+        }
+
+        /* ==============================
+           LOGIN
+        ============================== */
+
+        .login-text {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #8f97aa;
+
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #818cf8;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            margin-left: 4px;
+        }
+
+        .login-text a:hover {
+            color: #a5b4fc;
+            text-decoration: underline;
+        }
+
+        /* ==============================
+           SECURITY TEXT
+        ============================== */
+
+        .security {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #656d82;
+
+            font-size: 12px;
+        }
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 800px) {
+
+            .container {
+                max-width: 450px;
+                min-height: auto;
+            }
+
+            .left-section {
+                display: none;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                border-radius: 18px;
+            }
+
+            .right-section {
+                padding: 35px 22px;
+            }
+
+            .form-header h2 {
+                font-size: 26px;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-<div class="box">
+    <div class="container">
 
-    <h1>Register</h1>
+        <!-- ==============================
+             LEFT SIDE
+        ============================== -->
 
-    <form id="registerForm">
+        <div class="left-section">
 
-        <input
-            type="text"
-            id="username"
-            placeholder="Username"
-            required
-        >
+            <div class="logo">
+                💬
+            </div>
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email"
-            required
-        >
+            <h1>
+                Connect.<br>
+                Chat. Anywhere.
+            </h1>
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password"
-            required
-        >
+            <p class="description">
+                Create your account and join the conversation.
+                Experience fast and real-time messaging with
+                your friends and team.
+            </p>
 
-        <button type="submit">
-            Register
-        </button>
+            <div class="features">
 
-    </form>
+                <div class="feature">
 
-    <p id="result"></p>
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
 
-    <p>
-        Already have an account?
-        <a href="/login-page">Login</a>
-    </p>
+                    <span>
+                        Real-time messaging
+                    </span>
 
-</div>
+                </div>
 
-<script>
 
-document.getElementById("registerForm").addEventListener("submit", async function(event) {
+                <div class="feature">
 
-    event.preventDefault();
+                    <div class="feature-icon">
+                        🔒
+                    </div>
 
-    const username =
-        document.getElementById("username").value;
+                    <span>
+                        Secure authentication
+                    </span>
 
-    const email =
-        document.getElementById("email").value;
+                </div>
 
-    const password =
-        document.getElementById("password").value;
 
-    const url =
-        "/register?username=" +
-        encodeURIComponent(username) +
-        "&email=" +
-        encodeURIComponent(email) +
-        "&password=" +
-        encodeURIComponent(password);
+                <div class="feature">
 
-    try {
+                    <div class="feature-icon">
+                        🌐
+                    </div>
 
-        const response = await fetch(url, {
-            method: "POST"
-        });
+                    <span>
+                        Access from anywhere
+                    </span>
 
-        const data = await response.json();
+                </div>
 
-        document.getElementById("result").innerText =
-            data.message || data.detail;
+            </div>
 
-        if (response.ok) {
+        </div>
 
-            setTimeout(function() {
-                window.location.href = "/login-page";
-            }, 1000);
 
-        }
+        <!-- ==============================
+             RIGHT SIDE
+        ============================== -->
 
-    } catch (error) {
+        <div class="right-section">
 
-        document.getElementById("result").innerText =
-            "Cannot connect to backend";
+            <div class="form-container">
 
-    }
+                <div class="form-header">
 
-});
+                    <h2>
+                        Create Account
+                    </h2>
 
-</script>
+                    <p>
+                        Enter your details to get started.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+                    <!-- USERNAME -->
+
+                    <div class="input-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="text"
+                                id="username"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="password-input"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="register-btn"
+                        id="registerButton"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+
+                <!-- RESULT -->
+
+                <p id="result"></p>
+
+
+                <!-- LOGIN -->
+
+                <div class="login-text">
+
+                    Already have an account?
+
+                    <a href="/login-page">
+                        Login
+                    </a>
+
+                </div>
+
+
+                <div class="security">
+                    Your information is securely processed.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /* ==============================
+           SHOW / HIDE PASSWORD
+        ============================== */
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+
+                    togglePassword.innerText = "🙈";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    togglePassword.innerText = "👁";
+
+                }
+
+            }
+        );
+
+
+        /* ==============================
+           REGISTER
+        ============================== */
+
+        document
+            .getElementById("registerForm")
+            .addEventListener(
+                "submit",
+                async function (event) {
+
+                    event.preventDefault();
+
+
+                    const username =
+                        document
+                            .getElementById("username")
+                            .value
+                            .trim();
+
+
+                    const email =
+                        document
+                            .getElementById("email")
+                            .value
+                            .trim();
+
+
+                    const password =
+                        document
+                            .getElementById("password")
+                            .value;
+
+
+                    const result =
+                        document.getElementById("result");
+
+
+                    const button =
+                        document.getElementById("registerButton");
+
+
+                    /* Clear previous message */
+
+                    result.innerText = "";
+
+
+                    /* Loading */
+
+                    button.disabled = true;
+
+                    button.innerText = "Creating Account...";
+
+
+                    const url =
+                        "/register?username=" +
+                        encodeURIComponent(username) +
+                        "&email=" +
+                        encodeURIComponent(email) +
+                        "&password=" +
+                        encodeURIComponent(password);
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                url,
+                                {
+                                    method: "POST"
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        result.innerText =
+                            data.message ||
+                            data.detail ||
+                            "Registration completed.";
+
+
+                        if (response.ok) {
+
+                            result.style.color =
+                                "#86efac";
+
+
+                            button.innerText =
+                                "Account Created ✓";
+
+
+                            setTimeout(
+                                function () {
+
+                                    window.location.href =
+                                        "/login-page";
+
+                                },
+                                1000
+                            );
+
+                        } else {
+
+                            result.style.color =
+                                "#fca5a5";
+
+
+                            button.disabled = false;
+
+                            button.innerText =
+                                "Create Account";
+
+                        }
+
+                    } catch (error) {
+
+                        result.innerText =
+                            "Cannot connect to backend.";
+
+                        result.style.color =
+                            "#fca5a5";
+
+
+                        button.disabled = false;
+
+                        button.innerText =
+                            "Create Account";
+
+                    }
+
+                }
+            );
+
+    </script>
 
 </body>
+
 </html>
+```
