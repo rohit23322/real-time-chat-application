@@ -12,7 +12,7 @@ if not DATABASE_URL:
 
 
 # Create database engine
-engine = create_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL.replace("mysql://", "mysql+pymysql://"))
 
 
 # Create database session
